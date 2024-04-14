@@ -1,0 +1,79 @@
+{
+    "_base_": [
+        "../../_base_/default_runtime.py",
+        "../../_base_/models/daformer_sepaspp_mitb5.py",
+        "../../_base_/datasets/uda_gengtaCAug_to_cityscapes_512x512.py",
+        "../../_base_/uda/dacs_fdthings_srconly.py",
+        "../../_base_/schedules/adamw.py",
+        "../../_base_/schedules/poly10warm.py"
+    ],
+    "gpu_model": "NVIDIAGeForceRTX2080Ti",
+    "n_gpus": 1,
+    "seed": 1,
+    "model": {
+        "pretrained": "pretrained/mit_b5.pth",
+        "backbone": {
+            "type": "mit_b5"
+        },
+        "decode_head": {},
+        "test_cfg": {
+            "mode": "slide",
+            "batched_slide": true,
+            "stride": [
+                256,
+                256
+            ],
+            "crop_size": [
+                512,
+                512
+            ]
+        }
+    },
+    "data": {
+        "samples_per_gpu": 2,
+        "workers_per_gpu": 1,
+        "train": {
+            "type": "DGDataset"
+        }
+    },
+    "optimizer_config": null,
+    "optimizer": {
+        "lr": 6e-05,
+        "paramwise_cfg": {
+            "custom_keys": {
+                "head": {
+                    "lr_mult": 10.0
+                },
+                "pos_block": {
+                    "decay_mult": 0.0
+                },
+                "norm": {
+                    "decay_mult": 0.0
+                }
+            }
+        }
+    },
+    "runner": {
+        "type": "IterBasedRunner",
+        "max_iters": 40000
+    },
+    "checkpoint_config": {
+        "by_epoch": false,
+        "interval": 40000,
+        "max_keep_ckpts": 1
+    },
+    "evaluation": {
+        "interval": 4000,
+        "metric": "mIoU"
+    },
+    "name": "240413_0947_gengtaCAug2cs_dgdacs_fdthings_srconly_daformer_sepaspp_sl_mitb5_poly10warm_s1_22f14",
+    "exp": 60,
+    "name_dataset": "gengtaCAug2cityscapes",
+    "name_architecture": "daformer_sepaspp_sl_mitb5",
+    "name_encoder": "mitb5",
+    "name_decoder": "daformer_sepaspp_sl",
+    "name_uda": "dgdacs_fdthings_srconly",
+    "name_opt": "adamw_6e-05_pmTrue_poly10warm_1x2_40k",
+    "work_dir": "work_dirs/local-exp60/240413_0947_gengtaCAug2cs_dgdacs_fdthings_srconly_daformer_sepaspp_sl_mitb5_poly10warm_s1_22f14",
+    "git_rev": "7343a6311aa0327b425ef033a3db0efccbb0ef67"
+}
