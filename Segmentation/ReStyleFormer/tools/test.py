@@ -232,7 +232,7 @@ def main():
         dataset = build_dataset(
             dict(
                 type='GTADataset',
-                data_root='data/gta/',
+                data_root='/mnt/dataset/gta/',
                 img_dir='images',
                 ann_dir='labels',
                 pipeline=pipeline))
@@ -241,7 +241,7 @@ def main():
         dataset = build_dataset(
             dict(
                 type='CityscapesDataset',
-                data_root='data/cityscapes/',
+                data_root='/mnt/dataset/cityscapes/',
                 img_dir='leftImg8bit/val',
                 ann_dir='gtFine/val',
                 pipeline=pipeline))
@@ -250,7 +250,7 @@ def main():
         dataset = build_dataset(
             dict(
                 type='BDD100KDataset',
-                data_root='data/bdd100k',
+                data_root='/mnt/dataset/bdd100k',
                 img_dir='images/10k/val',
                 ann_dir='labels/sem_seg/masks/val',
                 pipeline=pipeline))
@@ -259,7 +259,7 @@ def main():
         dataset = build_dataset(
             dict(
                 type='MapillaryDataset',
-                data_root='data/mapillary',
+                data_root='/mnt/dataset/mapillary',
                 img_dir='validation/images',
                 ann_dir='validation/labels',
                 pipeline=pipeline))
